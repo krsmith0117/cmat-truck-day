@@ -116,6 +116,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  /* ---------
+  Reference to the AWS hosted API so that state can be saved between computers 
+  ------------ */
+
+  const API_BASE = 'https://1vchxsghce.execute-api.us-east-1.amazonaws.com';
+  
 /* ---------------------------------------------------------------------
    EmailJS configuration — fill these in from your EmailJS dashboard
    (emailjs.com → Email Services / Email Templates / Account → General).
