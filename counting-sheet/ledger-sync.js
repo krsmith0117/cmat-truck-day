@@ -15,7 +15,7 @@
    simply skipped, with a note in the UI and console.
 --------------------------------------------------------------------- */
 const API_BASE = 'https://1vchxsghce.execute-api.us-east-1.amazonaws.com';
-const cloudSyncReady = API_BASE && !API_BASE.includes('YOUR-API-ID');
+const cloudSyncReady = API_BASE && !API_BASE.includes('1vchxsghce');
 const AUTOSAVE_DELAY_MS = 1500;
 
 /* ---------------------------------------------------------------------
