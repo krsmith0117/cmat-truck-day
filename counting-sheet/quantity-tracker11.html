@@ -16,12 +16,15 @@
     </div>
     <div class="ledger-sync">
       <span class="truck-box">
-        Truck Name
-        <input type="text" class="ledger-name-input" id="ledgerName" placeholder="ledger name" autocomplete="off">
+        Ledger
+        <select class="ledger-select" id="ledgerSelect">
+          <option value="__new__">+ New ledger…</option>
+        </select>
+        <input type="text" class="ledger-name-input" id="newLedgerName" placeholder="new ledger name" autocomplete="off" style="display:none;">
       </span>
       <button class="ghost-btn" id="loadLedgerBtn">Load</button>
       <button class="ghost-btn" id="syncBtn">☁ Sync now</button>
-      <span class="sync-status error" id="syncStatus">cloud sync not configured</span>
+      <span class="sync-status" id="syncStatus">not loaded</span>
     </div>
   </header>
 
@@ -125,16 +128,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  /* ---------
-  Reference to the AWS hosted API so that state can be saved between computers 
-  Point this at the API Gateway Invoke URL from the Lambda Deployment. Leave as-is and cloud 
-  sync is simply skipped with a not in the console.
-  ------------ */
-
-  const API_BASE = 'https://1vchxsghce.execute-api.us-east-1.amazonaws.com';
-  const cloudSyncReady = API_BASE; /* && !API_BASE.includes('1vchxsghce'); */
-  const AUTOSAVE_DELAY_MS = 1500;
-  
 /* ---------------------------------------------------------------------
    EmailJS configuration — fill these in from your EmailJS dashboard
    (emailjs.com → Email Services / Email Templates / Account → General).
@@ -644,5 +637,6 @@ if(SAVED && SAVED.names){
   });
 }
 </script>
+<script src="ledger-sync.js"></script>
 </body>
 </html>
