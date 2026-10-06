@@ -14,7 +14,7 @@
    Lambda deployment (see DEPLOY.md). Leave as-is and cloud sync is
    simply skipped, with a note in the UI and console.
 --------------------------------------------------------------------- */
-const API_BASE = 'https://YOUR-API-ID.execute-api.YOUR-REGION.amazonaws.com';
+const API_BASE = 'https://1vchxsghce.execute-api.us-east-1.amazonaws.com';
 const cloudSyncReady = API_BASE && !API_BASE.includes('YOUR-API-ID');
 const AUTOSAVE_DELAY_MS = 1500;
 
