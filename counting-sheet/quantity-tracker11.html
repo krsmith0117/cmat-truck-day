@@ -187,12 +187,14 @@ truckInput.value = (SAVED && SAVED.truck) ? SAVED.truck : '';
 truckInput.addEventListener('input', () => {
   // keep it to a single digit
   truckInput.value = truckInput.value.replace(/[^0-9]/g, '').slice(0, 1);
+  scheduleAutoSave();
 });
 
 unitInput.value = (SAVED && SAVED.truckUnit) ? SAVED.truckUnit : '';
 unitInput.addEventListener('input', () => {
   // keep it to at most 6 digits
   unitInput.value = unitInput.value.replace(/[^0-9]/g, '').slice(0, 6);
+  scheduleAutoSave();
 });
 
 function refNumber(pr, c){
@@ -366,6 +368,7 @@ function toggleColor(c){
 
   buildGrid();
   buildPad();
+  scheduleAutoSave();
 }
 
 function setSelectedValue(q){
@@ -380,6 +383,7 @@ function setSelectedValue(q){
   buildTally();
 
   maybeEmailRow(pr);
+  scheduleAutoSave();
 }
 
 function deleteSelected(){
@@ -394,6 +398,7 @@ function deleteSelected(){
   rowEmailStatus[pr] = '';
   buildGrid();
   buildTally();
+  scheduleAutoSave();
 }
 
 function buildTally(){
@@ -562,6 +567,7 @@ document.getElementById('clearAll').addEventListener('click', () => {
   buildGrid();
   buildPad();
   buildTally();
+  scheduleAutoSave();
 });
 
 deleteBtn.addEventListener('click', deleteSelected);
@@ -588,6 +594,7 @@ const colorDefaultLabels = {
   input.addEventListener('input', () => {
     const name = input.value.trim();
     colorLabelEls[c].textContent = name ? name : colorDefaultLabels[c];
+    scheduleAutoSave();
   });
 });
 
