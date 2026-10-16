@@ -127,14 +127,14 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
+<!-- <script> 
 /* ---------------------------------------------------------------------
    EmailJS configuration — fill these in from your EmailJS dashboard
    (emailjs.com → Email Services / Email Templates / Account → General).
    Until PUBLIC_KEY is set to a real value, row emails are skipped and a
    note is logged to the browser console instead of sending anything.
 --------------------------------------------------------------------- */
-const EMAILJS_SERVICE_ID  = 'service_0m0eo57';
+/* const EMAILJS_SERVICE_ID  = 'service_0m0eo57';
 const EMAILJS_TEMPLATE_ID = 'template_ddcvfcg';
 const EMAILJS_PUBLIC_KEY  = 'hdaK9w6lEn-dri6Mp';
 const NOTIFY_EMAIL = 'gracebibleocc@gmail.com';
@@ -422,7 +422,7 @@ function buildTally(){
   }
   totalCountEl.textContent = totalCount;
   totalProductEl.textContent = totalProduct;
-}
+} */
 
 /* ---------------------------------------------------------------------
    Row auto-email: fires once, automatically, the moment all 25 cells in
@@ -430,7 +430,7 @@ function buildTally(){
    no server/backend is needed — just a Service ID, Template ID and
    Public Key from an EmailJS account, set at the top of this script.
 --------------------------------------------------------------------- */
-function maybeEmailRow(pr){
+/* function maybeEmailRow(pr){
   if(rowEmailSent[pr]) return;
   if(!isRowComplete(pr)) return;
 
@@ -444,14 +444,14 @@ function formatRowDetails(pr){
     lines.push(`#${refNumber(pr, c)}: ${data[pr][c]}`);
   }
   return lines.join('\n');
-}
+} */
 
 /* Builds a full, self-contained snapshot of the ledger as it currently
    stands — the same "save to HTML" format the Save button produces,
    with all entered quantities/colors baked in as window.__SAVED_STATE__
    so opening the file reloads exactly this state. Shared by the Save
    button and by the row-complete email attachment. */
-function buildLedgerSnapshotHtml(){
+/* function buildLedgerSnapshotHtml(){
   const names = {
     green: document.getElementById('greenName').value,
     blue: document.getElementById('blueName').value,
@@ -643,7 +643,12 @@ if(SAVED && SAVED.names){
     }
   });
 }
-</script>
+</script> */ -->
+<script src="ledger-core.js"></script>
+<script src="colors.js"></script>
+<script src="email.js"></script>
+<script src="snapshot.js"></script>
+<script src="init.js"></script>
 <script src="ledger-sync.js"></script>
 </body>
 </html>
