@@ -20,7 +20,7 @@
 const EMAILJS_SERVICE_ID  = 'service_0m0eo57';
 const EMAILJS_TEMPLATE_ID = 'template_ddcvfcg';
 const EMAILJS_PUBLIC_KEY  = 'hdaK9w6lEn-dri6Mp';
-const NOTIFY_EMAIL = 'gracebibleocc@gmail.com';
+const NOTIFY_EMAIL = 'karobins117@gmail.com';
 // Must exactly match the "Attachment" parameter name configured in the
 // EmailJS template's Attachments tab (dashboard.emailjs.com/admin/templates).
 const EMAILJS_ATTACHMENT_FIELD = 'ledger_file';
