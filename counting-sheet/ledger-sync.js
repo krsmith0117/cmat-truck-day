@@ -48,12 +48,9 @@ function collectState(){
   return {
     data,
     color,
-    names: {
-      green: document.getElementById('greenName').value,
-      blue: document.getElementById('blueName').value,
-      yellow: document.getElementById('yellowName').value,
-      pink: document.getElementById('pinkName').value
-    },
+    names: Object.fromEntries(
+      COLORS.map((c) => [c, document.getElementById(c + 'Name').value])
+    ),
     truck: truckInput.value,
     truckUnit: unitInput.value
   };
@@ -66,7 +63,7 @@ function applyState(state){
   truckInput.value = state.truck || '';
   unitInput.value = state.truckUnit || '';
 
-  ['green', 'blue', 'yellow', 'pink'].forEach((c) => {
+   COLORS.forEach((c) => {
     const name = state.names ? state.names[c] : '';
     const input = document.getElementById(c + 'Name');
     input.value = name || '';
@@ -79,10 +76,7 @@ function applyState(state){
   selectedReadout.textContent = 'No cell selected';
   gridHint.textContent = 'select a blank cell to begin';
   deleteBtn.disabled = true;
-  greenBtn.disabled = true;
-  blueBtn.disabled = true;
-  yellowBtn.disabled = true;
-  pinkBtn.disabled = true;
+  setColorButtonsDisabled(true);
 
   buildGrid();
   buildPad();
