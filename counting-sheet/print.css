@@ -1,0 +1,132 @@
+/* =======================================================================
+   Quantity Ledger — print styles and the static (emailed) page
+
+   Load this AFTER tally-sheet.css:
+     <link rel="stylesheet" href="tally-sheet.css">
+     <link rel="stylesheet" href="print.css">
+
+   It overrides the older @media print blocks in tally-sheet.css, so those
+   can stay or be deleted — this file defines the whole print look itself.
+
+   Two things live here:
+   1. Printing (Print button / Ctrl+P): the entry grid is scaled to fit the
+      page width, controls and app-status text are hidden, and colors are
+      forced to print. Page 1 is the grid and totals, page 2 is the tally
+      (labelled with the truck / unit so the pages can't get separated).
+   2. html.static-snapshot: extra screen rules for the read-only copy of the
+      ledger that print.js builds for the email attachment.
+======================================================================= */
+
+/* Orientation only, so the paper size (Letter / A4) stays the printer's
+   choice. The grid is 25 columns wide and 14 rows tall, which suits
+   portrait once it is scaled down a little (see zoom below). */
+@page{
+  size: portrait;
+  margin: 0.4in;
+}
+
+@media print{
+  /* Scale everything so the ~870px-wide grid fits inside the printable
+     width of both Letter and A4 with a little room to spare. */
+  html{ zoom: 0.8; }
+
+  /* Browsers drop background colors when printing unless told not to.
+     Without this the colored cells, row totals and tiles print as white. */
+  *{
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body{
+    background: #fff;
+    padding: 0;
+  }
+
+  .wrap{ max-width: none; }
+
+  /* Controls and app status text have no place on paper. */
+  .ledger-sync,
+  .action-bar,
+  .grid-actions,
+  .pad-col,
+  .color-mark-bar,
+  .hint,
+  .row-mail-status{
+    display: none !important;
+  }
+  /* Its own rule so browsers without :has() only lose this one. */
+  .panel:has(#selectedReadout){ display: none !important; }
+
+  header{
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  .layout{ display: block; }
+
+  .panel{
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  #gridScroll{
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  /* Truck / unit read as filled-in blanks on a form, not input boxes. */
+  .truck-input{
+    border: none;
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 0;
+    background: transparent;
+  }
+  .truck-input::placeholder{ color: transparent; }
+
+  /* Tally: its own page, at a sensible width instead of edge to edge. */
+  .layout > div:last-child{
+    break-before: page;
+    page-break-before: always;
+  }
+  .tally-scroll{
+    max-height: none;
+    overflow: visible;
+    max-width: 520px;
+  }
+  table{ page-break-inside: auto; }
+  tr{ page-break-inside: avoid; }
+
+  /* "Tally ........ TRUCK 5 · UNIT 204817" — print.js sets data-print-label. */
+  .panel-title[data-print-label]{ max-width: 520px; }
+  .panel-title[data-print-label]::after{
+    content: attr(data-print-label);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Static snapshot (email attachment) — screen styling only.
+   print.js adds the class "static-snapshot" to <html> in that copy, and
+   swaps the truck / unit inputs for plain <span>s with the same classes.
+----------------------------------------------------------------------- */
+html.static-snapshot .truck-input{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The tally box scrolls on the live page; in a static copy show all of it. */
+html.static-snapshot .tally-scroll{
+  max-height: none;
+  overflow: visible;
+}
+
+html.static-snapshot .cell{ cursor: default; }
+html.static-snapshot .cell:hover{ border-color: var(--paper-line); }
