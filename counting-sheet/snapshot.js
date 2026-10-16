@@ -49,7 +49,3 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   const blob = new Blob([fullHtml], {type: 'text/html'});
   triggerDownload(blob, filename + '.html');
 });
-
-document.getElementById('printBtn').addEventListener('click', () => {
-  window.print();
-});
