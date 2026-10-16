@@ -109,7 +109,7 @@ function sendRowEmail(pr){
   const refEnd = refNumber(pr, COLS - 1);
   const total = rowTotal(pr);
 
-  const snapshotHtml = buildLedgerSnapshotHtml();
+  const snapshotHtml = buildPrintableHTML();
   const snapshotDataUri = toDataUri(snapshotHtml, 'text/html');
 
   const templateParams = {
