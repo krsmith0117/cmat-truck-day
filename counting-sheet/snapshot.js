@@ -15,12 +15,9 @@
    be opened with those files beside it; for a standalone, fully styled
    copy see buildPrintableHtml() in print.js. */
 function buildLedgerSnapshotHtml(){
-  const names = Object.fromEntries(
-    COLORS.map((c) => [c, document.getElementById(c + 'Name').value])
-  );
   const truck = truckInput.value;
   const truckUnit = unitInput.value;
-  const stateJson = JSON.stringify({data, color, names, truck, truckUnit});
+  const stateJson = JSON.stringify({data, color, truck, truckUnit});
   const stateScript = '<script>window.__SAVED_STATE__ = ' + stateJson + ';<\/script>\n';
   return '<!DOCTYPE html>\n' + document.documentElement.outerHTML.replace('<head>', '<head>\n' + stateScript);
 }
