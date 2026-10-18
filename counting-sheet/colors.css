@@ -1,0 +1,264 @@
+/* =======================================================================
+   Quantity Ledger — the 10 church colors
+
+   Load AFTER tally-sheet.css, which defines the color variables:
+     <link rel="stylesheet" href="tally-sheet.css">
+     <link rel="stylesheet" href="colors.css">
+     <link rel="stylesheet" href="print.css">
+
+   Each color is identified by a key (deepteal, seagreen, ...). The key is
+   the CSS class below AND the value stored in the saved ledger, and it is
+   listed in COLOR_OPTIONS in colors.js, which is also where the church
+   names are set. For every key there are three rules:
+
+     .cell.color-KEY          the ledger cell      fill: --lKEY
+     .color-btn.KEY           the "Mark" button    fill: --lKEY-btn, edge: --lKEY
+     .color-total-tile.KEY    the total tile       fill: --lKEY-btn
+
+   Text color is chosen per color for contrast: most of the palette is mid
+   or dark, so some colors need white text and the rest need the dark ink.
+
+   NOTE: tally-sheet.css names the deep teal button color --ldeelteal-btn
+   (spelled "deel"). The deep teal rules below accept either spelling.
+======================================================================= */
+
+/* --- Layout: the mark bar now sits ABOVE the grid; 10 buttons, 5 per row -- */
+.color-mark-bar{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 0 0 12px;
+}
+
+.color-btn{
+  padding: 9px 4px;
+  white-space: nowrap;
+}
+
+.color-totals{
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 700px){
+  .color-mark-bar,
+  .color-totals{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Church 1: deepteal */
+.cell.color-deepteal{
+  background: var(--ldeepteal);
+  color: #fff;
+}
+.color-btn.deepteal{
+  background: var(--ldeepteal-btn, var(--ldeelteal-btn));
+  border-color: var(--ldeepteal);
+  color: #fff;
+}
+.color-btn.deepteal:hover{
+  background: var(--ldeepteal);
+  color: #fff;
+}
+.color-total-tile.deepteal{
+  background: var(--ldeepteal-btn, var(--ldeelteal-btn));
+  color: #fff;
+}
+
+/* Church 2: seagreen */
+.cell.color-seagreen{
+  background: var(--lseagreen);
+  color: var(--ink);
+}
+.color-btn.seagreen{
+  background: var(--lseagreen-btn);
+  border-color: var(--lseagreen);
+  color: #fff;
+}
+.color-btn.seagreen:hover{
+  background: var(--lseagreen);
+  color: var(--ink);
+}
+.color-total-tile.seagreen{
+  background: var(--lseagreen-btn);
+  color: #fff;
+}
+
+/* Church 3: sagegreen */
+.cell.color-sagegreen{
+  background: var(--lsagegreen);
+  color: var(--ink);
+}
+.color-btn.sagegreen{
+  background: var(--lsagegreen-btn);
+  border-color: var(--lsagegreen);
+  color: var(--ink);
+}
+.color-btn.sagegreen:hover{
+  background: var(--lsagegreen);
+  color: var(--ink);
+}
+.color-total-tile.sagegreen{
+  background: var(--lsagegreen-btn);
+  color: var(--ink);
+}
+
+/* Church 4: softsage */
+.cell.color-softsage{
+  background: var(--lsoftsage);
+  color: var(--ink);
+}
+.color-btn.softsage{
+  background: var(--lsoftsage-btn);
+  border-color: var(--lsoftsage);
+  color: var(--ink);
+}
+.color-btn.softsage:hover{
+  background: var(--lsoftsage);
+  color: var(--ink);
+}
+.color-total-tile.softsage{
+  background: var(--lsoftsage-btn);
+  color: var(--ink);
+}
+
+/* Church 5: goldensand */
+.cell.color-goldensand{
+  background: var(--lgoldensand);
+  color: var(--ink);
+}
+.color-btn.goldensand{
+  background: var(--lgoldensand-btn);
+  border-color: var(--lgoldensand);
+  color: var(--ink);
+}
+.color-btn.goldensand:hover{
+  background: var(--lgoldensand);
+  color: var(--ink);
+}
+.color-total-tile.goldensand{
+  background: var(--lgoldensand-btn);
+  color: var(--ink);
+}
+
+/* Church 6: warmapricot */
+.cell.color-warmapricot{
+  background: var(--lwarmapricot);
+  color: var(--ink);
+}
+.color-btn.warmapricot{
+  background: var(--lwarmapricot-btn);
+  border-color: var(--lwarmapricot);
+  color: var(--ink);
+}
+.color-btn.warmapricot:hover{
+  background: var(--lwarmapricot);
+  color: var(--ink);
+}
+.color-total-tile.warmapricot{
+  background: var(--lwarmapricot-btn);
+  color: var(--ink);
+}
+
+/* Church 7: terracotta */
+.cell.color-terracotta{
+  background: var(--lterracotta);
+  color: var(--ink);
+}
+.color-btn.terracotta{
+  background: var(--lterracotta-btn);
+  border-color: var(--lterracotta);
+  color: #fff;
+}
+.color-btn.terracotta:hover{
+  background: var(--lterracotta);
+  color: var(--ink);
+}
+.color-total-tile.terracotta{
+  background: var(--lterracotta-btn);
+  color: #fff;
+}
+
+/* Church 8: clay */
+.cell.color-clay{
+  background: var(--lclay);
+  color: var(--ink);
+}
+.color-btn.clay{
+  background: var(--lclay-btn);
+  border-color: var(--lclay);
+  color: #fff;
+}
+.color-btn.clay:hover{
+  background: var(--lclay);
+  color: var(--ink);
+}
+.color-total-tile.clay{
+  background: var(--lclay-btn);
+  color: #fff;
+}
+
+/* Church 9: warmivory */
+.cell.color-warmivory{
+  background: var(--lwarmivory);
+  color: var(--ink);
+  /* ivory is close to the amber of an uncolored filled cell, so give it an edge */
+  border-color: var(--lwarmivory-btn);
+}
+.cell.color-warmivory:hover{ border-color: var(--amber); }
+.color-btn.warmivory{
+  background: var(--lwarmivory-btn);
+  border-color: var(--lwarmivory);
+  color: var(--ink);
+}
+.color-btn.warmivory:hover{
+  background: var(--lwarmivory);
+  color: var(--ink);
+}
+.color-total-tile.warmivory{
+  background: var(--lwarmivory-btn);
+  color: var(--ink);
+}
+
+/* Church 10: dustyindigo */
+.cell.color-dustyindigo{
+  background: var(--ldustyindigo);
+  color: #fff;
+}
+.color-btn.dustyindigo{
+  background: var(--ldustyindigo-btn);
+  border-color: var(--ldustyindigo);
+  color: #fff;
+}
+.color-btn.dustyindigo:hover{
+  background: var(--ldustyindigo);
+  color: #fff;
+}
+.color-total-tile.dustyindigo{
+  background: var(--ldustyindigo-btn);
+  color: #fff;
+}
+
+/* A colored cell that also has a quantity is a touch darker, as before. */
+.cell.color-deepteal.filled,
+.cell.color-seagreen.filled,
+.cell.color-sagegreen.filled,
+.cell.color-softsage.filled,
+.cell.color-goldensand.filled,
+.cell.color-warmapricot.filled,
+.cell.color-terracotta.filled,
+.cell.color-clay.filled,
+.cell.color-warmivory.filled,
+.cell.color-dustyindigo.filled{
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06));
+}
+
+/* Re-assert the selected look. This file loads after tally-sheet.css, so
+   without this the color rules above would win over .cell.selected and a
+   selected colored cell would not look selected. */
+.cell.selected{
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  transform: scale(1.06);
+}
