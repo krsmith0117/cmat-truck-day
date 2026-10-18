@@ -23,16 +23,16 @@
           names here when you have them.
 --------------------------------------------------------------------- */
 const COLOR_OPTIONS = [
-  { key: 'deepteal',    name: 'Church 1'  },
-  { key: 'seagreen',    name: 'Church 2'  },
-  { key: 'sagegreen',   name: 'Church 3'  },
-  { key: 'softsage',    name: 'Church 4'  },
-  { key: 'goldensand',  name: 'Church 5'  },
-  { key: 'warmapricot', name: 'Church 6'  },
-  { key: 'terracotta',  name: 'Church 7'  },
-  { key: 'clay',        name: 'Church 8'  },
-  { key: 'warmivory',   name: 'Church 9'  },
-  { key: 'dustyindigo', name: 'Church 10' }
+  { key: 'deepteal',    name: 'Grace Bible Church'  },
+  { key: 'seagreen',    name: 'Santa Fe Trail Baptist Church'  },
+  { key: 'sagegreen',   name: 'Centralia - First Baptist Church'  },
+  { key: 'softsage',    name: 'Grandview Baptist Church'  },
+  { key: 'goldensand',  name: 'Midway Heights Baptist Church'  },
+  { key: 'warmapricot', name: 'Open Door Baptist Church'  },
+  { key: 'terracotta',  name: 'Prairie Grove Baptist Church'  },
+  { key: 'clay',        name: 'Harrisburg Christian Church'  },
+  { key: 'warmivory',   name: 'Carpenter Street - Moberly'  },
+  { key: 'dustyindigo', name: 'Salisbury - First Baptist Church' }
 ];
 
 const COLORS = COLOR_OPTIONS.map((o) => o.key);
