@@ -1,8 +1,8 @@
 /* =======================================================================
-   Quantity Ledger — snapshot, Save and Print
+   Quantity Ledger — Save
 
-   buildLedgerSnapshotHtml() is shared by the Save button below and by the
-   row-complete email attachment in email.js.
+   buildLedgerSnapshotHtml() builds the editable snapshot the Save button
+   downloads. (The email attachment and the Print button are in print.js.)
 ======================================================================= */
 
 /* Builds a full snapshot of the ledger as it currently stands — the same
@@ -10,9 +10,10 @@
    quantities/colors baked in as window.__SAVED_STATE__ so opening the file
    reloads exactly this state.
 
-   NOTE: the snapshot is the page's own HTML, so it links to the same
-   external files (tally-sheet.css and the .js files) by relative path.
-   Opened from somewhere those files aren't, it will be missing them. */
+      NOTE: the snapshot is the page's own HTML, so it links to the same
+   external files (the .css and .js files) by relative path. It is meant to
+   be opened with those files beside it; for a standalone, fully styled
+   copy see buildPrintableHtml() in print.js. */
 function buildLedgerSnapshotHtml(){
   const names = Object.fromEntries(
     COLORS.map((c) => [c, document.getElementById(c + 'Name').value])
