@@ -48,9 +48,6 @@ function collectState(){
   return {
     data,
     color,
-    names: Object.fromEntries(
-      COLORS.map((c) => [c, document.getElementById(c + 'Name').value])
-    ),
     truck: truckInput.value,
     truckUnit: unitInput.value
   };
@@ -63,12 +60,12 @@ function applyState(state){
   truckInput.value = state.truck || '';
   unitInput.value = state.truckUnit || '';
 
-   COLORS.forEach((c) => {
+ /*  COLORS.forEach((c) => {
     const name = state.names ? state.names[c] : '';
     const input = document.getElementById(c + 'Name');
     input.value = name || '';
     colorLabelEls[c].textContent = name ? name : colorDefaultLabels[c];
-  });
+  }); */
 
   rowEmailSent = Array.from({length: PAIR_ROWS}, (_, pr) => isRowComplete(pr));
   rowEmailStatus = Array.from({length: PAIR_ROWS}, () => '');
