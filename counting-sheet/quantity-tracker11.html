@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quantity Ledger</title>
 <link rel="stylesheet" href="tally-sheet.css">
+<link rel="stylesheet" href="colors.css">
 <link rel="stylesheet" href="print.css">
 </head>
 <body>
@@ -45,29 +46,12 @@
           </span>
         </span>
         <span class="hint" id="gridHint">select a blank cell to begin</span>
+        <div class="color-mark-bar" id="colorMarkBar"></div>
       </p>
       <div class="grid-row">
         <div class="grid-col">
           <div id="gridScroll">
             <div class="grid" id="grid"></div>
-          </div>
-          <div class="color-mark-bar">
-            <div class="color-mark-box green">
-              <button class="color-btn green" id="greenBtn" disabled>Mark green</button>
-              <input type="text" class="color-name-input" id="greenName" placeholder="Name">
-            </div>
-            <div class="color-mark-box blue">
-              <button class="color-btn blue" id="blueBtn" disabled>Mark blue</button>
-              <input type="text" class="color-name-input" id="blueName" placeholder="Name">
-            </div>
-            <div class="color-mark-box yellow">
-              <button class="color-btn yellow" id="yellowBtn" disabled>Mark yellow</button>
-              <input type="text" class="color-name-input" id="yellowName" placeholder="Name">
-            </div>
-            <div class="color-mark-box pink">
-              <button class="color-btn pink" id="pinkBtn" disabled>Mark pink</button>
-              <input type="text" class="color-name-input" id="pinkName" placeholder="Name">
-            </div>
           </div>
         </div>
         <div class="pad-col" id="pad"></div>
@@ -76,20 +60,7 @@
         <span>Total of row totals</span>
         <b id="grandTotal">0</b>
       </div>
-      <div class="color-totals">
-        <div class="color-total-tile green">
-          <span id="greenLabel">Green cells total</span><b id="greenTotal">0</b>
-        </div>
-        <div class="color-total-tile blue">
-          <span id="blueLabel">Blue cells total</span><b id="blueTotal">0</b>
-        </div>
-        <div class="color-total-tile yellow">
-          <span id="yellowLabel">Yellow cells total</span><b id="yellowTotal">0</b>
-        </div>
-        <div class="color-total-tile pink">
-          <span id="pinkLabel">Pink cells total</span><b id="pinkTotal">0</b>
-        </div>
-      </div>
+      <div class="color-totals" id="colorTotals"></div>
       <div class="grid-actions">
         <button class="ghost-btn" id="clearAll">Clear all entries</button>
         <button class="lock-btn locked" id="lockToggle">🔒 Locked</button>
