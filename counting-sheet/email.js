@@ -8,7 +8,7 @@
 
    Needs the EmailJS CDN script loaded first (see the HTML), and loads
    after ledger-core.js because it initialises state from isRowComplete().
-   Uses buildLedgerSnapshotHtml() from snapshot.js at send time.
+      Uses buildPrintableHtml() from print.js at send time.
 ======================================================================= */
 
 /* ---------------------------------------------------------------------
