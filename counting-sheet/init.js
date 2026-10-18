@@ -9,4 +9,3 @@
 buildGrid();
 buildPad();
 buildTally();
-applySavedColorNames();
