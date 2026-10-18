@@ -1,42 +1,80 @@
 /* =======================================================================
    Quantity Ledger — colors
 
-   Everything about marking cells with a color: the list of colors, the
-   "Mark <color>" buttons, the editable color names / total labels, and the
-   helpers the grid uses to apply a color class and total up each color.
+   The ten church colors: the list below, the "Mark" buttons above the
+   grid, the total tiles under it, and the helpers the grid uses to color
+   cells and add up each color.
 
-   Loaded after ledger-core.js. Note that the HTML (buttons, name inputs,
-   total tiles) and tally-sheet.css (.color-green etc.) still have the four
-   colors written out by hand; COLORS below drives the JS side.
+   The buttons and tiles are built from COLOR_OPTIONS, so this list is the
+   only place to change the names. Their look is in colors.css.
+
+   Loaded after ledger-core.js.
 ======================================================================= */
 
-const COLORS = ['green', 'blue', 'yellow', 'pink'];
+/* ---------------------------------------------------------------------
+   The colors. Order here is the order on screen.
 
-// Kept as individual globals too, because ledger-sync.js refers to them.
-const greenBtn = document.getElementById('greenBtn');
-const blueBtn = document.getElementById('blueBtn');
-const yellowBtn = document.getElementById('yellowBtn');
-const pinkBtn = document.getElementById('pinkBtn');
-const colorButtons = [greenBtn, blueBtn, yellowBtn, pinkBtn];
+   key  - stored in the saved ledger and used as the CSS class name
+          (.color-KEY, .color-btn.KEY, .color-total-tile.KEY in colors.css,
+          which use the --lKEY variables in tally-sheet.css).
+          Do NOT change a key once ledgers have been saved with it, or
+          those cells will lose their color.
+   name - what people see. Safe to change at any time: put the real church
+          names here when you have them.
+--------------------------------------------------------------------- */
+const COLOR_OPTIONS = [
+  { key: 'deepteal',    name: 'Church 1'  },
+  { key: 'seagreen',    name: 'Church 2'  },
+  { key: 'sagegreen',   name: 'Church 3'  },
+  { key: 'softsage',    name: 'Church 4'  },
+  { key: 'goldensand',  name: 'Church 5'  },
+  { key: 'warmapricot', name: 'Church 6'  },
+  { key: 'terracotta',  name: 'Church 7'  },
+  { key: 'clay',        name: 'Church 8'  },
+  { key: 'warmivory',   name: 'Church 9'  },
+  { key: 'dustyindigo', name: 'Church 10' }
+];
 
-const colorLabelEls = {
-  green: document.getElementById('greenLabel'),
-  blue: document.getElementById('blueLabel'),
-  yellow: document.getElementById('yellowLabel'),
-  pink: document.getElementById('pinkLabel')
-};
-const colorDefaultLabels = {
-  green: 'Green cells total',
-  blue: 'Blue cells total',
-  yellow: 'Yellow cells total',
-  pink: 'Pink cells total'
-};
+const COLORS = COLOR_OPTIONS.map((o) => o.key);
+
+/* ---------------------------------------------------------------------
+   Build the Mark buttons (above the grid) and the total tiles (below it)
+--------------------------------------------------------------------- */
+const colorMarkBar = document.getElementById('colorMarkBar');
+const colorTotalsEl = document.getElementById('colorTotals');
+const colorButtonEls = {};
+
+COLOR_OPTIONS.forEach(({key, name}) => {
+  const btn = document.createElement('button');
+  btn.className = 'color-btn ' + key;
+  btn.id = key + 'Btn';
+  btn.disabled = true; // enabled once a cell is selected
+  btn.textContent = name;
+  btn.title = 'Mark the selected cell: ' + name;
+  btn.addEventListener('click', () => toggleColor(key));
+  colorMarkBar.appendChild(btn);
+  colorButtonEls[key] = btn;
+
+  const tile = document.createElement('div');
+  tile.className = 'color-total-tile ' + key;
+  const label = document.createElement('span');
+  label.id = key + 'Label';
+  label.textContent = name;
+  const total = document.createElement('b');
+  total.id = key + 'Total';
+  total.textContent = '0';
+  tile.appendChild(label);
+  tile.appendChild(total);
+  colorTotalsEl.appendChild(tile);
+});
 
 /* ---------------------------------------------------------------------
    Helpers used by the grid renderer
 --------------------------------------------------------------------- */
 
-// CSS class for a stored color value, or null for blank / unknown values.
+// CSS class for a stored color value, or null for blank / unknown values
+// (for example the old green / blue / yellow / pink marks from before the
+// ten church colors — those cells simply show as uncolored).
 function colorClassFor(cl){
   return COLORS.includes(cl) ? 'color-' + cl : null;
 }
@@ -57,7 +95,7 @@ function renderColorTotals(counts){
 }
 
 function setColorButtonsDisabled(disabled){
-  colorButtons.forEach((btn) => { btn.disabled = disabled; });
+  COLORS.forEach((c) => { colorButtonEls[c].disabled = disabled; });
 }
 
 /* ---------------------------------------------------------------------
@@ -76,34 +114,4 @@ function toggleColor(c){
   buildGrid();
   buildPad();
   scheduleAutoSave();
-}
-
-greenBtn.addEventListener('click', () => toggleColor('green'));
-blueBtn.addEventListener('click', () => toggleColor('blue'));
-yellowBtn.addEventListener('click', () => toggleColor('yellow'));
-pinkBtn.addEventListener('click', () => toggleColor('pink'));
-
-/* ---------------------------------------------------------------------
-   Color names (the text boxes under each button) -> total tile labels
---------------------------------------------------------------------- */
-COLORS.forEach((c) => {
-  const input = document.getElementById(c + 'Name');
-  input.addEventListener('input', () => {
-    const name = input.value.trim();
-    colorLabelEls[c].textContent = name ? name : colorDefaultLabels[c];
-    scheduleAutoSave();
-  });
-});
-
-// Restores color names from a saved snapshot (window.__SAVED_STATE__).
-// Called once by init.js.
-function applySavedColorNames(){
-  if(!(SAVED && SAVED.names)) return;
-  COLORS.forEach((c) => {
-    const name = SAVED.names[c];
-    if(name){
-      document.getElementById(c + 'Name').value = name;
-      colorLabelEls[c].textContent = name;
-    }
-  });
 }
