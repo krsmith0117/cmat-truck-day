@@ -614,14 +614,14 @@ body{ padding-bottom:150px; }   /* keeps the dock from covering the bottom of th
 .qty-dock .pad-btn.featured{ font-size:22px; font-weight:700; padding:7px 0; }
 .qty-dock .qty-rest .pad-btn{ font-size:14px; padding:8px 0; }
 .qty-dock .pad-btn.common{ border-color:var(--amber); }  /* 14-17 stand out a bit in the small row */
-.dock-top{
+/*.dock-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   margin-bottom:6px;
 }
-.dock-top .dock-status{ margin-bottom:0; flex:1; min-width:0; }
+.dock-top .dock-status{ margin-bottom:0; flex:1; min-width:0; } */
 
 .qty-dock .delete-btn{
   width:auto;
@@ -634,4 +634,14 @@ body{ padding-bottom:150px; }   /* keeps the dock from covering the bottom of th
 @media (max-width:700px){
   body{ padding-bottom:240px; }  /* the small buttons wrap to ~3 rows on phones */
   .qty-dock .pad-btn.featured{ font-size:20px; padding:7px 0; }
+  .qty-small-row{ flex-direction:column; align-items:stretch; gap:8px; }
+  .qty-small-row .qty-rest{ flex:none; }
+  .qty-small-row .delete-btn{ align-self:flex-end; }
 }
+
+.qty-small-row{
+  display:flex;
+  align-items:flex-end;   /* Delete lines up with the last line of small buttons */
+  gap:28px;               /* the gap between the last quantity button and Delete */
+}
+.qty-small-row .qty-rest{ flex:1; min-width:0; }
