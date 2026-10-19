@@ -17,6 +17,7 @@
 const STATIC_REMOVE_SELECTORS = [
   '.ledger-sync',      // cloud sync controls in the header
   '.pad-col',          // number pad
+   '.qty-dock',         // docked quantity bar
   '.color-mark-bar',   // "Mark green" etc. buttons and their name boxes
   '.grid-actions',     // clear all / lock
   '.action-bar',       // Save / Print
