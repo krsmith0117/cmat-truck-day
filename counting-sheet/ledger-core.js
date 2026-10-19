@@ -14,7 +14,8 @@
 
 const COLS = 25;
 const PAIR_ROWS = 14; // 14 numbered rows * 25 cols = 350
-const MIN_Q = 3, MAX_Q = 23;
+const MIN_Q = 1, MAX_Q = 23;
+const FEATURED_Q = [14, 15, 16, 17];
 
 const SAVED = window.__SAVED_STATE__ || null;
 
@@ -80,7 +81,7 @@ function rowTotal(pr){
 /* ---------------------------------------------------------------------
    Rendering
 --------------------------------------------------------------------- */
-function buildPad(){
+/*function buildPad(){
   padEl.innerHTML = '';
     const canEnter = !!(selected && activeColor);
   for(let q = MAX_Q; q >= MIN_Q; q--){
@@ -92,6 +93,55 @@ function buildPad(){
     padEl.appendChild(btn);
   }
    updateEntryHint();
+} */
+
+function buildPad(){
+  padEl.innerHTML = '';
+  const canEnter = !!(selected && activeColor);
+
+  const makeBtn = (q, extraClass) => {
+    const btn = document.createElement('button');
+    btn.className = 'pad-btn' + (extraClass ? ' ' + extraClass : '');
+    btn.textContent = q;
+    btn.disabled = !canEnter;
+    btn.addEventListener('click', () => setSelectedValue(q));
+    return btn;
+  };
+
+  // Top row: the big, most-used buttons
+  const featuredRow = document.createElement('div');
+  featuredRow.className = 'qty-featured';
+  FEATURED_Q.forEach((q) => featuredRow.appendChild(makeBtn(q, 'featured')));
+
+  // Second block: every quantity in counting order, 14-17 included
+  const restRow = document.createElement('div');
+  restRow.className = 'qty-rest';
+  for(let q = MIN_Q; q <= MAX_Q; q++){
+    restRow.appendChild(makeBtn(q, FEATURED_Q.includes(q) ? 'common' : ''));
+  }
+
+  padEl.appendChild(featuredRow);
+  padEl.appendChild(restRow);
+  updateDockStatus();
+  updateEntryHint();
+}
+
+// One line above the buttons: which church and which cell will get the next quantity.
+function updateDockStatus(){
+  const el = document.getElementById('dockStatus');
+  if(!el) return;
+
+  let churchName = '';
+  if(activeColor && typeof COLOR_OPTIONS !== 'undefined'){
+    const opt = COLOR_OPTIONS.find((o) => o.key === activeColor);
+    churchName = opt ? opt.name : activeColor;
+  }
+  const cellText = selected ? 'Cell #' + refNumber(selected.pr, selected.c) : '';
+
+  if(selected && activeColor)  el.textContent = churchName + ' — ' + cellText;
+  else if(selected)            el.textContent = cellText + ' — now choose a church';
+  else if(activeColor)         el.textContent = churchName + ' — now select a cell';
+  else                         el.textContent = 'Choose a church and select a cell';
 }
 
 // The little prompt beside the "Entry Grid" title: says what to do next, and
