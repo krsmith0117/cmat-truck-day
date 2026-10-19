@@ -91,7 +91,26 @@ function rowTotal(pr){
     btn.disabled = !canEnter;
     btn.addEventListener('click', () => setSelectedValue(q));
     return btn;
-  }; */
+  }; 
+  
+  // Top row: the big, most-used buttons
+  const featuredRow = document.createElement('div');
+  featuredRow.className = 'qty-featured';
+  FEATURED_Q.forEach((q) => featuredRow.appendChild(makeBtn(q, 'featured')));
+
+  // Second block: every quantity in counting order, 14-17 included
+  const restRow = document.createElement('div');
+  restRow.className = 'qty-rest';
+  for(let q = MIN_Q; q <= MAX_Q; q++){
+    restRow.appendChild(makeBtn(q, FEATURED_Q.includes(q) ? 'common' : ''));
+  }
+
+  padEl.appendChild(featuredRow);
+  padEl.appendChild(restRow);
+  updateDockStatus();
+  updateEntryHint();
+}
+  */
 function buildPad(){
   const featuredEl = document.getElementById('padFeatured');
   const restEl = document.getElementById('padRest');
@@ -117,24 +136,6 @@ function buildPad(){
     restEl.appendChild(makeBtn(q, FEATURED_Q.includes(q) ? 'common' : ''));
   }
 
-  updateDockStatus();
-  updateEntryHint();
-}
-
-  // Top row: the big, most-used buttons
-  const featuredRow = document.createElement('div');
-  featuredRow.className = 'qty-featured';
-  FEATURED_Q.forEach((q) => featuredRow.appendChild(makeBtn(q, 'featured')));
-
-  // Second block: every quantity in counting order, 14-17 included
-  const restRow = document.createElement('div');
-  restRow.className = 'qty-rest';
-  for(let q = MIN_Q; q <= MAX_Q; q++){
-    restRow.appendChild(makeBtn(q, FEATURED_Q.includes(q) ? 'common' : ''));
-  }
-
-  padEl.appendChild(featuredRow);
-  padEl.appendChild(restRow);
   updateDockStatus();
   updateEntryHint();
 }
