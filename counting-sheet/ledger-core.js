@@ -80,21 +80,7 @@ function rowTotal(pr){
 /* ---------------------------------------------------------------------
    Rendering
 --------------------------------------------------------------------- */
-/*function buildPad(){
-  padEl.innerHTML = '';
-    const canEnter = !!(selected && activeColor);
-  for(let q = MAX_Q; q >= MIN_Q; q--){
-    const btn = document.createElement('button');
-    btn.className = 'pad-btn';
-    btn.textContent = q;
-    btn.disabled = !canEnter;
-    btn.addEventListener('click', () => setSelectedValue(q));
-    padEl.appendChild(btn);
-  }
-   updateEntryHint();
-} */
-
-function buildPad(){
+/* function buildPad(){
   padEl.innerHTML = '';
   const canEnter = !!(selected && activeColor);
 
@@ -105,7 +91,35 @@ function buildPad(){
     btn.disabled = !canEnter;
     btn.addEventListener('click', () => setSelectedValue(q));
     return btn;
+  }; */
+function buildPad(){
+  const featuredEl = document.getElementById('padFeatured');
+  const restEl = document.getElementById('padRest');
+  featuredEl.innerHTML = '';
+  restEl.innerHTML = '';
+
+  const canEnter = !!(selected && activeColor);
+
+  const makeBtn = (q, extraClass) => {
+    const btn = document.createElement('button');
+    btn.className = 'pad-btn' + (extraClass ? ' ' + extraClass : '');
+    btn.textContent = q;
+    btn.disabled = !canEnter;
+    btn.addEventListener('click', () => setSelectedValue(q));
+    return btn;
   };
+
+  // Top row: the big, most-used buttons
+  FEATURED_Q.forEach((q) => featuredEl.appendChild(makeBtn(q, 'featured')));
+
+  // Small row: every quantity in counting order, 14-17 included
+  for(let q = MIN_Q; q <= MAX_Q; q++){
+    restEl.appendChild(makeBtn(q, FEATURED_Q.includes(q) ? 'common' : ''));
+  }
+
+  updateDockStatus();
+  updateEntryHint();
+}
 
   // Top row: the big, most-used buttons
   const featuredRow = document.createElement('div');
