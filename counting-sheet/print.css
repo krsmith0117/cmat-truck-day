@@ -50,6 +50,7 @@
   .action-bar,
   .grid-actions,
   .pad-col,
+   .qty-dock,
   .color-mark-bar,
   .hint,
   .row-mail-status{
@@ -130,3 +131,4 @@ html.static-snapshot .tally-scroll{
 
 html.static-snapshot .cell{ cursor: default; }
 html.static-snapshot .cell:hover{ border-color: var(--paper-line); }
+html.static-snapshot body{ padding-bottom:60px; }
