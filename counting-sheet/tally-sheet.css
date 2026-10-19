@@ -224,33 +224,19 @@
     background:var(--amber-soft);
   }
 
-
-/*  .cell.color-green{
-    background:var(--lgreen);
-  }
-
-  .cell.color-blue{
-    background:var(--lblue);
-  }
-
-  .cell.color-yellow{
-    background:var(--lyellow);
-  }
-
-  .cell.color-pink{
-    background:var(--lpink);
-  }
-
-  .cell.color-green.filled, .cell.color-blue.filled, .cell.color-yellow.filled, .cell.color-pink.filled{
-    background-image:linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06));
-  } */
-
-  .cell.selected{
+.cell.selected{
+  outline:3px solid var(--ink);
+  outline-offset:-3px;   /* draws inside the cell so the grid's scroll area can't clip it */
+  position:relative;
+  z-index:1;
+}
+  
+/* .cell.selected{
     background:var(--ink);
     color:var(--paper);
     border-color:var(--ink);
     transform:scale(1.06);
-  }
+  } */
 
   .rowtotal-block{
     display:flex;
@@ -444,35 +430,7 @@
     cursor:pointer;
     border:1px solid transparent;
   }
-/*
-  .color-btn.green{
-    background:var(--lgreen-btn);
-    border-color:var(--lgreen);
-    color:#2c5c2a;
-  }
-  .color-btn.green:hover{background:var(--lgreen);}
 
-  .color-btn.blue{
-    background:var(--lblue-btn);
-    border-color:var(--lblue);
-    color:#25577a;
-  }
-  .color-btn.blue:hover{background:var(--lblue);}
-
-  .color-btn.yellow{
-    background:var(--lyellow-btn);
-    border-color:var(--lyellow);
-    color:#7a6a1a;
-  }
-  .color-btn.yellow:hover{background:var(--lyellow);}
-
-  .color-btn.pink{
-    background:var(--lpink-btn);
-    border-color:var(--lpink);
-    color:#7a2d54;
-  }
-  .color-btn.pink:hover{background:var(--lpink);}
-*/
   .color-btn:disabled{
     opacity:0.35;
     cursor:not-allowed;
@@ -497,27 +455,7 @@
     font-size:20px;
     margin-top:2px;
   }
-/*
-  .color-total-tile.green{
-    background:var(--lgreen-btn);
-    color:#2c5c2a;
-  }
 
-  .color-total-tile.blue{
-    background:var(--lblue-btn);
-    color:#25577a;
-  }
-
-  .color-total-tile.yellow{
-    background:var(--lyellow-btn);
-    color:#7a6a1a;
-  }
-
-  .color-total-tile.pink{
-    background:var(--lpink-btn);
-    color:#7a2d54;
-  }
-*/
   .delete-btn{
     width:100%;
     font-family:'IBM Plex Mono', monospace;
@@ -673,11 +611,27 @@ body{ padding-bottom:150px; }   /* keeps the dock from covering the bottom of th
 .qty-rest{ display:grid; grid-template-columns:repeat(auto-fill, minmax(38px, 1fr)); gap:4px; }
 
 .qty-dock .pad-btn{ width:100%; min-width:0; margin:0; }
-.qty-dock .pad-btn.featured{ font-size:24px; font-weight:700; padding:14px 0; }
+.qty-dock .pad-btn.featured{ font-size:22px; font-weight:700; padding:7px 0; }
 .qty-dock .qty-rest .pad-btn{ font-size:14px; padding:8px 0; }
 .qty-dock .pad-btn.common{ border-color:var(--amber); }  /* 14-17 stand out a bit in the small row */
+.dock-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:6px;
+}
+.dock-top .dock-status{ margin-bottom:0; flex:1; min-width:0; }
 
+.qty-dock .delete-btn{
+  width:auto;
+  flex:none;
+  margin:0;
+  padding:6px 14px;
+  font-size:12px;
+  white-space:nowrap;
+}
 @media (max-width:700px){
   body{ padding-bottom:240px; }  /* the small buttons wrap to ~3 rows on phones */
-  .qty-dock .pad-btn.featured{ font-size:22px; padding:12px 0; }
+  .qty-dock .pad-btn.featured{ font-size:20px; padding:7px 0; }
 }
