@@ -12,7 +12,7 @@
    names are set. For every key there are three rules:
 
      .cell.color-KEY          the ledger cell      fill: --lKEY
-     .color-btn.KEY           the "Mark" button    fill: --lKEY-btn, edge: --lKEY
+     .color-btn.KEY           the church button    fill: --lKEY-btn, edge: --lKEY
      .color-total-tile.KEY    the total tile       fill: --lKEY-btn
 
    Text color is chosen per color for contrast: most of the palette is mid
@@ -22,7 +22,7 @@
    (spelled "deel"). The deep teal rules below accept either spelling.
 ======================================================================= */
 
-/* --- Layout: the mark bar now sits ABOVE the grid; 10 buttons, 5 per row -- */
+/* --- Layout: the church bar sits ABOVE the grid; 10 buttons, 5 per row ----- */
 .color-mark-bar{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -44,6 +44,25 @@
   .color-totals{
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* One line of instruction across the top of the bar (added by colors.js). */
+.color-bar-caption{
+  grid-column: 1 / -1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* The church currently chosen: a ring that shows on any button color, plus a
+   tick, so it is obvious at a glance whose boxes are being entered. */
+.color-btn.active{
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+}
+.color-btn.active::before{
+  content: '✓ ';
 }
 
 /* Church 1: deepteal */
