@@ -37,7 +37,7 @@ const COLOR_OPTIONS = [
   { key: 'warmapricot', name: 'Open Door Baptist Church'  },
   { key: 'terracotta',  name: 'Prairie Grove Baptist Church'  },
   { key: 'clay',        name: 'Harrisburg Christian Church'  },
-  { key: 'warmivory',   name: 'Carpenter Street - Moberly'  },
+  { key: 'lavendar',   name: 'Carpenter Street - Moberly'  },
   { key: 'dustyindigo', name: 'Salisbury - First Baptist Church' }
 ];
 
