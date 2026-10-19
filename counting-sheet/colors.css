@@ -65,22 +65,22 @@
   content: '✓ ';
 }
 
-/* Church 1: deepteal */
-.cell.color-deepteal{
-  background: var(--ldeepteal);
+/* Church 1: softblue */
+.cell.color-softblue{
+  background: var(--lsoftblue);
   color: #fff;
 }
-.color-btn.deepteal{
-  background: var(--ldeepteal-btn, var(--ldeelteal-btn));
-  border-color: var(--ldeepteal);
+.color-btn.softblue{
+  background: var(--lsoftblue-btn, var(--lsoftblue-btn));
+  border-color: var(--lsoftblue);
   color: #fff;
 }
-.color-btn.deepteal:hover{
-  background: var(--ldeepteal);
+.color-btn.softblue:hover{
+  background: var(--lsoftblue);
   color: #fff;
 }
-.color-total-tile.deepteal{
-  background: var(--ldeepteal-btn, var(--ldeelteal-btn));
+.color-total-tile.softblue{
+  background: var(--lsoftblue-btn, var(--lsoftblue-btn));
   color: #fff;
 }
 
@@ -238,22 +238,22 @@
   color: var(--ink);
 }
 
-/* Church 10: dustyindigo */
-.cell.color-dustyindigo{
-  background: var(--ldustyindigo);
+/* Church 10: softpink */
+.cell.color-softpink{
+  background: var(--lsoftpink);
   color: #fff;
 }
-.color-btn.dustyindigo{
-  background: var(--ldustyindigo-btn);
-  border-color: var(--ldustyindigo);
+.color-btn.softpink{
+  background: var(--lsoftpink-btn);
+  border-color: var(--lsoftpink);
   color: #fff;
 }
-.color-btn.dustyindigo:hover{
-  background: var(--ldustyindigo);
+.color-btn.softpink:hover{
+  background: var(--lsoftpink);
   color: #fff;
 }
-.color-total-tile.dustyindigo{
-  background: var(--ldustyindigo-btn);
+.color-total-tile.softpink{
+  background: var(--lsoftpink-btn);
   color: #fff;
 }
 
