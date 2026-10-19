@@ -36,7 +36,6 @@ const padEl = document.getElementById('pad');
 const tallyBody = document.getElementById('tallyBody');
 const totalCountEl = document.getElementById('totalCount');
 const totalProductEl = document.getElementById('totalProduct');
-const selectedReadout = document.getElementById('selectedReadout');
 const gridHint = document.getElementById('gridHint');
 const deleteBtn = document.getElementById('deleteBtn');
 const truckInput = document.getElementById('truckNumber');
@@ -265,7 +264,6 @@ function selectCell(pr, c){
   selected = {pr, c};
   endOfGrid = false;
   const n = refNumber(pr, c);
-  selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>${data[pr][c] ?? '—'}</b>`;
   deleteBtn.disabled = data[pr][c] === null;
   buildGrid();
   buildPad();
@@ -281,11 +279,9 @@ function advanceSelection(){
   if(pr < PAIR_ROWS){
     selected = {pr, c};
     const n = refNumber(pr, c);
-    selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>${data[pr][c] ?? '—'}</b>`;
     deleteBtn.disabled = data[pr][c] === null;
   } else {
     // reached the end of the grid (the color stays chosen)
-    selectedReadout.textContent = 'No cell selected';
     deleteBtn.disabled = true;
     selected = null;
     endOfGrid = true;
@@ -314,7 +310,6 @@ function deleteSelected(){
   data[selected.pr][selected.c] = null;
   color[selected.pr][selected.c] = null;
   const n = refNumber(selected.pr, selected.c);
-  selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>—</b>`;
   deleteBtn.disabled = true;
   // row is no longer complete, so it's eligible to email again once refilled
   resetRowEmailState(pr);
@@ -356,7 +351,6 @@ document.getElementById('clearAll').addEventListener('click', () => {
   color = Array.from({length: PAIR_ROWS}, () => Array(COLS).fill(null));
   resetAllRowEmailState();
   selected = null;
-  selectedReadout.textContent = 'No cell selected';
   deleteBtn.disabled = true;
   resetEntryMode();
   buildGrid();
