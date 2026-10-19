@@ -70,7 +70,6 @@ function applyState(state){
   rowEmailSent = Array.from({length: PAIR_ROWS}, (_, pr) => isRowComplete(pr));
   rowEmailStatus = Array.from({length: PAIR_ROWS}, () => '');
   selected = null;
-  selectedReadout.textContent = 'No cell selected';
   gridHint.textContent = 'select a blank cell to begin';
   deleteBtn.disabled = true;
   setColorButtonsDisabled(true);
