@@ -29,7 +29,7 @@
           names here when you have them.
 --------------------------------------------------------------------- */
 const COLOR_OPTIONS = [
-  { key: 'deepteal',    name: 'Grace Bible Church'  },
+  { key: 'softblue',    name: 'Grace Bible Church'  },
   { key: 'seagreen',    name: 'Santa Fe Trail Baptist Church'  },
   { key: 'sagegreen',   name: 'Centralia - First Baptist Church'  },
   { key: 'softsage',    name: 'Grandview Baptist Church'  },
@@ -38,7 +38,7 @@ const COLOR_OPTIONS = [
   { key: 'terracotta',  name: 'Prairie Grove Baptist Church'  },
   { key: 'clay',        name: 'Harrisburg Christian Church'  },
   { key: 'lavendar',   name: 'Carpenter Street - Moberly'  },
-  { key: 'dustyindigo', name: 'Salisbury - First Baptist Church' }
+  { key: 'softpink', name: 'Salisbury - First Baptist Church' }
 ];
 
 const COLORS = COLOR_OPTIONS.map((o) => o.key);
