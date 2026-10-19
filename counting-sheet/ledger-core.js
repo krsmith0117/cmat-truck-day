@@ -24,6 +24,12 @@ let data = SAVED ? SAVED.data : Array.from({length: PAIR_ROWS}, () => Array(COLS
 let color = SAVED ? SAVED.color : Array.from({length: PAIR_ROWS}, () => Array(COLS).fill(null)); // null | color name (see colors.js)
 let selected = null; // {pr, c}
 
+// The church (color key from colors.js) that delivered the boxes being
+// entered. A quantity can't be entered until one is chosen, and every
+// quantity entered takes this color until a different one is chosen.
+let activeColor = null;
+let endOfGrid = false; // true once entry has run off the last cell
+
 const gridEl = document.getElementById('grid');
 const padEl = document.getElementById('pad');
 const tallyBody = document.getElementById('tallyBody');
@@ -76,14 +82,40 @@ function rowTotal(pr){
 --------------------------------------------------------------------- */
 function buildPad(){
   padEl.innerHTML = '';
+    const canEnter = !!(selected && activeColor);
   for(let q = MAX_Q; q >= MIN_Q; q--){
     const btn = document.createElement('button');
     btn.className = 'pad-btn';
     btn.textContent = q;
-    btn.disabled = !selected;
+    btn.disabled = !canEnter;
     btn.addEventListener('click', () => setSelectedValue(q));
     padEl.appendChild(btn);
   }
+   updateEntryHint();
+}
+
+// The little prompt beside the "Entry Grid" title: says what to do next, and
+// why the number pad is greyed out when it is. It is worked out from the
+// current state each time, so it can't go stale. (buildPad() calls it.)
+function updateEntryHint(){
+  if(!activeColor){
+    gridHint.textContent = 'choose a color to begin';
+  } else if(!selected){
+    gridHint.textContent = endOfGrid
+      ? 'end of grid reached'
+      : colorName(activeColor) + ' — select a cell';
+  } else {
+    gridHint.textContent = colorName(activeColor) + ' — tap a quantity';
+  }
+}
+
+// Forget the chosen color (and any end-of-grid state): used by Clear all, and
+// when a different ledger is loaded, so a color from one sheet can never leak
+// onto the next.
+function resetEntryMode(){
+  activeColor = null;
+  endOfGrid = false;
+  syncColorButtons();
 }
 
 function buildGrid(){
@@ -181,11 +213,10 @@ function buildTally(){
 --------------------------------------------------------------------- */
 function selectCell(pr, c){
   selected = {pr, c};
+  endOfGrid = false;
   const n = refNumber(pr, c);
-  gridHint.textContent = 'cell selected — tap a quantity';
   selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>${data[pr][c] ?? '—'}</b>`;
   deleteBtn.disabled = data[pr][c] === null;
-  setColorButtonsDisabled(false);
   buildGrid();
   buildPad();
 }
@@ -200,30 +231,29 @@ function advanceSelection(){
   if(pr < PAIR_ROWS){
     selected = {pr, c};
     const n = refNumber(pr, c);
-    gridHint.textContent = 'cell selected — tap a quantity';
     selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>${data[pr][c] ?? '—'}</b>`;
     deleteBtn.disabled = data[pr][c] === null;
   } else {
-    // reached the end of the grid
-    gridHint.textContent = 'end of grid reached';
+    // reached the end of the grid (the color stays chosen)
     selectedReadout.textContent = 'No cell selected';
     deleteBtn.disabled = true;
-    setColorButtonsDisabled(true);
     selected = null;
+    endOfGrid = true;
   }
 }
 
 function setSelectedValue(q){
-  if(!selected) return;
-  const {pr} = selected;
-  data[selected.pr][selected.c] = q;
-
+  if(!selected || !activeColor) return;
+  const {pr, c} = selected;
+  data[pr][c] = q;
+  color[pr][c] = activeColor;
+ 
   advanceSelection();
-
+ 
   buildGrid();
   buildPad();
   buildTally();
-
+ 
   maybeEmailRow(pr);
   scheduleAutoSave();
 }
@@ -232,6 +262,7 @@ function deleteSelected(){
   if(!selected) return;
   const {pr} = selected;
   data[selected.pr][selected.c] = null;
+  color[selected.pr][selected.c] = null;
   const n = refNumber(selected.pr, selected.c);
   selectedReadout.innerHTML = `Selected: <b>#${n}</b> — value: <b>—</b>`;
   deleteBtn.disabled = true;
@@ -276,9 +307,8 @@ document.getElementById('clearAll').addEventListener('click', () => {
   resetAllRowEmailState();
   selected = null;
   selectedReadout.textContent = 'No cell selected';
-  gridHint.textContent = 'select a blank cell to begin';
   deleteBtn.disabled = true;
-  setColorButtonsDisabled(true);
+  resetEntryMode();
   buildGrid();
   buildPad();
   buildTally();
