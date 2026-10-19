@@ -217,25 +217,24 @@
   color: #fff;
 }
 
-/* Church 9: warmivory */
-.cell.color-warmivory{
-  background: var(--lwarmivory);
+/* Church 9: lavendar */
+.cell.color-lavendar{
+  background: var(--llavendar);
   color: var(--ink);
   /* ivory is close to the amber of an uncolored filled cell, so give it an edge */
-  border-color: var(--lwarmivory-btn);
+  border-color: var(--llavendar-btn);
 }
-.cell.color-warmivory:hover{ border-color: var(--amber); }
-.color-btn.warmivory{
-  background: var(--lwarmivory-btn);
-  border-color: var(--lwarmivory);
+.color-btn.lavendar{
+  background: var(--llavendar-btn);
+  border-color: var(--llavendar);
   color: var(--ink);
 }
-.color-btn.warmivory:hover{
-  background: var(--lwarmivory);
+.color-btn.lavendar:hover{
+  background: var(--llavendar);
   color: var(--ink);
 }
-.color-total-tile.warmivory{
-  background: var(--lwarmivory-btn);
+.color-total-tile.lavendar{
+  background: var(--llavendar-btn);
   color: var(--ink);
 }
 
@@ -267,7 +266,7 @@
 .cell.color-warmapricot.filled,
 .cell.color-terracotta.filled,
 .cell.color-clay.filled,
-.cell.color-warmivory.filled,
+.cell.color-lavendar.filled,
 .cell.color-dustyindigo.filled{
   background-image: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06));
 }
