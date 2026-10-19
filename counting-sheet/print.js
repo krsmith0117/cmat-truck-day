@@ -75,11 +75,6 @@ function buildPrintableHtml(){
   root.querySelectorAll('script').forEach((n) => n.remove());
   root.querySelectorAll(STATIC_REMOVE_SELECTORS.join(',')).forEach((n) => n.remove());
 
-  // The "Cell Actions" panel (selected cell + delete button).
-  const readout = root.querySelector('#selectedReadout');
-  const actionsPanel = readout ? readout.closest('.panel') : null;
-  if(actionsPanel) actionsPanel.remove();
-
   setPrintLabel(root);
 
   // Don't show whichever cell happened to be selected.
