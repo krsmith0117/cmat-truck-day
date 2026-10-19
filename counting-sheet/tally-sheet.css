@@ -11,14 +11,6 @@
     --red-soft:#f3ddd6;
     --cell-empty:#ffffff;
     --ref-bg:#eef0e6;
-    /* --lgreen:#cdeccb;
-    --lgreen-btn:#e4f5e2;
-    --lblue:#cfe6f5;
-    --lblue-btn:#e4f1fa;
-    --lyellow:#f5edb8;
-    --lyellow-btn:#faf5d6;
-    --lpink:#f5cfe0;
-    --lpink-btn:#fae1ec; */
     --ldeepteal: #264653;
     --ldeepteal-btn: #1D3942;
     --lseagreen: #2a9d8f;
@@ -39,6 +31,7 @@
     --lwarmivory-btn: #D3C7B4;
     --ldustyindigo: #3D405B;
     --ldustyindigo-btn: #30324A;
+    --llavendar: #B7A1CF;
   }
 
   *{box-sizing:border-box;}
