@@ -50,8 +50,8 @@ truckInput.addEventListener('input', () => {
 
 unitInput.value = (SAVED && SAVED.truckUnit) ? SAVED.truckUnit : '';
 unitInput.addEventListener('input', () => {
-  // keep it to at most 6 digits
-  unitInput.value = unitInput.value.replace(/[^0-9]/g, '').slice(0, 6);
+  // letters and digits only, at most 10 characters
+  unitInput.value = unitInput.value.replace(/[^A-Za-z0-9]/g, '').slice(0, 10);
   scheduleAutoSave();
 });
 
