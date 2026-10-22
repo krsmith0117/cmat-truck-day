@@ -23,16 +23,6 @@
 ======================================================================= */
 .color-mark-bar{
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));  /* minmax(0,…) lets columns shrink */
-  gap: 6px;
-  margin: 0 0 8px;
-  width: 100%;
-  max-width: 870px;      /* never wider than the grid, but never wider than the panel either */
-  box-sizing: border-box;
-}
-
-/* .color-mark-bar{
-  display: grid;
   grid-template-columns: repeat(4, 1fr);   
   gap: 6px;                                
   margin: 0 0 8px;
@@ -43,30 +33,18 @@
   padding: 4px 4px;
   font-size: 12px;
   line-height: 1.2;
-  white-space: nowrap;
-} */
-
-.color-btn{
-  padding: 4px 2px;
-  font-size: 12px;
-  line-height: 1.2;
-  min-width: 0;
-  width: 100%;
-  box-sizing: border-box;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;   /* a very long church name gets "…" instead of pushing the layout */
-}
+ /* white-space: nowrap; */
+} 
 
 .color-totals{
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 1fr);
    max-width: 870px;
 }
 
 @media (max-width: 700px){
   .color-mark-bar,
   .color-totals{
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
