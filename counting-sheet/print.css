@@ -132,3 +132,97 @@ html.static-snapshot .tally-scroll{
 html.static-snapshot .cell{ cursor: default; }
 html.static-snapshot .cell:hover{ border-color: var(--paper-line); }
 html.static-snapshot body{ padding-bottom:60px; }
+
+@media print{
+
+  /* ---- 1. Pattern and letter for each church ---- */
+  .color-softblue,   .color-total-tile.softblue{
+    --letter:"A";
+    --pat: repeating-linear-gradient(0deg, #000 0 .8px, transparent .8px 4px);
+  }
+  .color-seagreen,   .color-total-tile.seagreen{
+    --letter:"B";
+    --pat: repeating-linear-gradient(90deg, #000 0 .8px, transparent .8px 3px);
+  }
+  .color-sagegreen,  .color-total-tile.sagegreen{
+    --letter:"C";
+    --pat: repeating-linear-gradient(45deg, #000 0 .8px, transparent .8px 4px);
+  }
+  .color-softsage,   .color-total-tile.softsage{
+    --letter:"D";
+    --pat: repeating-linear-gradient(-45deg, #000 0 .8px, transparent .8px 4px);
+  }
+  .color-goldensand, .color-total-tile.goldensand{
+    --letter:"E";
+    --pat: radial-gradient(#000 1.3px, transparent 1.6px);
+    --sz: 6px 6px;
+  }
+  .color-warmapricot,.color-total-tile.warmapricot{
+    --letter:"F";
+    --pat: repeating-linear-gradient(0deg,  #000 0 .7px, transparent .7px 4px),
+           repeating-linear-gradient(90deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-terracotta, .color-total-tile.terracotta{
+    --letter:"G";
+    --pat: repeating-linear-gradient(45deg,  #000 0 .7px, transparent .7px 4px),
+           repeating-linear-gradient(-45deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-clay,       .color-total-tile.clay{
+    --letter:"H";
+    --pat: radial-gradient(#000 .7px, transparent .9px);
+    --sz: 3px 3px;
+  }
+  .color-lavendar,   .color-total-tile.lavendar{
+    --letter:"I";
+    --pat: linear-gradient(#777, #777);          /* solid mid-gray strip */
+  }
+  .color-softpink,   .color-total-tile.softpink{
+    --letter:"J";
+    --pat: linear-gradient(#000, #000);          /* solid black strip */
+  }
+
+  /* ---- 2. Cells and tiles stay white; the number is untouched ---- */
+  .cell[class*="color-"],
+  .color-total-tile{
+    background: #fff !important;
+    color: #000 !important;
+    position: relative;
+  }
+  .cell[class*="color-"]{
+    font-weight: 700;
+    border-color: #000 !important;
+  }
+
+  /* ---- 3. Pattern strip down the left edge ---- */
+  .cell[class*="color-"]::after,
+  .color-total-tile::after{
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 7px;
+    background-image: var(--pat, none);
+    background-size: var(--sz, auto);
+    border-right: 1px solid #000;
+  }
+
+  /* ---- 4. Letter in the top-right corner ---- */
+  .cell[class*="color-"]::before,
+  .color-total-tile::before{
+    content: var(--letter);
+    position: absolute;
+    top: 0; right: 1px;
+    font: 700 8px/1.1 'IBM Plex Mono', monospace;
+    color: #000;
+  }
+
+  /* ---- 5. Tiles: a bigger strip and letter, with room for the text ---- */
+  .color-total-tile{
+    border: 1px solid #000;
+    padding-left: 18px;
+  }
+  .color-total-tile::after{ width: 12px; }
+  .color-total-tile::before{
+    top: 4px; right: 6px;
+    font-size: 12px;
+  }
+}
