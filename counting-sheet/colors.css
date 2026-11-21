@@ -282,3 +282,94 @@
   border-color: var(--ink);
   transform: scale(1.06);
 }
+
+@media print{
+
+  /* ---- 1. Pattern, gray level and letter for each church ---- */
+  .color-softblue,   .color-total-tile.softblue{
+    --letter:"A";
+    --pat: repeating-linear-gradient(0deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-seagreen,   .color-total-tile.seagreen{
+    --letter:"B";
+    --pat: repeating-linear-gradient(90deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-sagegreen,  .color-total-tile.sagegreen{
+    --letter:"C";
+    --pat: repeating-linear-gradient(45deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-softsage,   .color-total-tile.softsage{
+    --letter:"D";
+    --pat: repeating-linear-gradient(-45deg, #000 0 .7px, transparent .7px 4px);
+  }
+  .color-goldensand, .color-total-tile.goldensand{
+    --letter:"E";
+    --pat: radial-gradient(#000 1.4px, transparent 1.7px);
+    --sz: 8px 8px;
+  }
+  .color-warmapricot,.color-total-tile.warmapricot{
+    --letter:"F";
+    --pat: repeating-linear-gradient(0deg,  #000 0 .6px, transparent .6px 5px),
+           repeating-linear-gradient(90deg, #000 0 .6px, transparent .6px 5px);
+  }
+  .color-terracotta, .color-total-tile.terracotta{
+    --letter:"G";
+    --pat: repeating-linear-gradient(45deg,  #000 0 .6px, transparent .6px 5px),
+           repeating-linear-gradient(-45deg, #000 0 .6px, transparent .6px 5px);
+  }
+  .color-clay,       .color-total-tile.clay{
+    --letter:"H";
+    --pat: radial-gradient(#000 .8px, transparent 1px);
+    --sz: 5px 5px;
+  }
+  .color-lavendar,   .color-total-tile.lavendar{
+    --letter:"I";
+    --bg:#dcdcdc;               /* plain light gray, no pattern */
+    --pat: none;
+  }
+  .color-softpink,   .color-total-tile.softpink{
+    --letter:"J";
+    --bg:#cfcfcf;               /* gray with fine dots */
+    --pat: radial-gradient(#000 .6px, transparent .8px);
+    --sz: 4px 4px;
+  }
+
+  /* ---- 2. Apply them (replaces the screen colors) ---- */
+  .cell[class*="color-"],
+  .color-total-tile{
+    background-color: var(--bg, #fff) !important;
+    background-image: var(--pat, none) !important;
+    background-size: var(--sz, auto) !important;
+    color: #000 !important;
+    position: relative;
+  }
+
+  /* Bold number with a white halo so it stays readable over the lines */
+  .cell[class*="color-"]{
+    font-weight: 700;
+    text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 3px #fff;
+    border-color: #000 !important;
+  }
+
+  /* ---- 3. The corner letter ---- */
+  .cell[class*="color-"]::before,
+  .color-total-tile::before{
+    content: var(--letter);
+    position: absolute;
+    top: 0; left: 1px;
+    padding: 0 1px;
+    background: #fff;
+    color: #000;
+    font: 700 8px/1.1 'IBM Plex Mono', monospace;
+    text-shadow: none;
+  }
+  .color-total-tile{
+    border: 1px solid #000;
+    padding-left: 18px;          /* room for the letter */
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff;
+  }
+  .color-total-tile::before{
+    top: 50%; transform: translateY(-50%);
+    font-size: 11px; left: 4px;
+  }
+}
